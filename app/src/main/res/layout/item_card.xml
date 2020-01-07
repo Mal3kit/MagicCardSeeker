@@ -30,10 +30,21 @@
             android:layout_marginStart="10dp"
             android:textSize="13sp"
             android:textStyle="bold"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toRightOf="@id/item_card_img"
+            app:layout_constraintBottom_toTopOf="@+id/item_card_description"
             app:layout_constraintVertical_chainStyle="packed"
             />
+
+        <TextView
+            android:id="@+id/item_card_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textSize="12sp"
+            android:maxLines="100"
+            app:layout_constraintTop_toBottomOf="@id/item_card_name"
+            app:layout_constraintLeft_toRightOf="@id/item_card_img"
+            app:layout_constraintVertical_chainStyle="packed"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -13,6 +13,12 @@ public class MagicCard {
     @Expose
     private String imageUrl;
 
+    @SerializedName("text")
+    @Expose
+    private String text;
+
+    private boolean showDetails = false;
+
     public String getName() {
         return name;
     }
@@ -27,5 +33,21 @@ public class MagicCard {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public boolean isShowDetails() {
+        return showDetails;
+    }
+
+    public void setShowDetails(boolean showDetails) {
+        this.showDetails = showDetails;
     }
 }

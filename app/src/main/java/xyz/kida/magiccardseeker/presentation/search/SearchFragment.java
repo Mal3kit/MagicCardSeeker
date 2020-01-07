@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.SearchView;
@@ -29,6 +30,7 @@ import xyz.kida.magiccardseeker.data.api.models.MagicCard;
 import xyz.kida.magiccardseeker.data.api.models.MagicCardSearchResponse;
 import xyz.kida.magiccardseeker.presentation.search.adapter.SearchAdapter;
 import xyz.kida.magiccardseeker.presentation.search.adapter.SearchAdapterListener;
+import xyz.kida.magiccardseeker.utils.ItemClickSupport;
 
 public class SearchFragment extends Fragment implements SearchAdapterListener {
 
@@ -37,6 +39,9 @@ public class SearchFragment extends Fragment implements SearchAdapterListener {
 
     @BindView(R.id.search_view)
     SearchView searchView;
+
+    @BindView(R.id.progress_bar)
+    ProgressBar progressBar;
 
     private List<MagicCard> cards;
     private Disposable disposable;
@@ -60,6 +65,7 @@ public class SearchFragment extends Fragment implements SearchAdapterListener {
         ButterKnife.bind(this, view);
         this.configureSearchView();
         this.configureRecyclerView();
+        this.configureOnClickRecyclerView();
         return view;
     }
 
@@ -81,8 +87,9 @@ public class SearchFragment extends Fragment implements SearchAdapterListener {
             @Override
             public boolean onQueryTextChange(String newText) {
                 if (newText.length() == 0) {
-
+                    progressBar.setVisibility(View.GONE);
                 } else {
+                    progressBar.setVisibility(View.VISIBLE);
                     timer.cancel();
                     timer = new Timer();
                     int sleep = 1000;
@@ -113,6 +120,13 @@ public class SearchFragment extends Fragment implements SearchAdapterListener {
 
 
     }
+
+    private void configureOnClickRecyclerView() {
+        ItemClickSupport.addTo(recyclerView, R.layout.item_card)
+                .setOnItemClickListener((recyclerView, position, v) ->
+                        updateUiWithDetails(position));
+    }
+
 
     @Override
     public void onClickDeleteButton(int position) {
@@ -154,6 +168,14 @@ public class SearchFragment extends Fragment implements SearchAdapterListener {
                 .stream()
                 .filter(c -> c.getImageUrl() != null)
                 .collect(Collectors.toList()));
+        cards.forEach(c -> c.setShowDetails(false));
+        progressBar.setVisibility(View.GONE);
+        adapter.notifyDataSetChanged();
+    }
+
+    private void updateUiWithDetails(int position) {
+        this.cards.forEach(c -> c.setShowDetails(false));
+        this.cards.get(position).setShowDetails(true);
         adapter.notifyDataSetChanged();
     }
 

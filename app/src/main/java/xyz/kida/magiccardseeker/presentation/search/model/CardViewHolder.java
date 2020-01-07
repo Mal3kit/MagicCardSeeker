@@ -20,7 +20,10 @@ import xyz.kida.magiccardseeker.presentation.search.adapter.SearchAdapterListene
 public class CardViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     @BindView(R.id.item_card_name)
-    TextView textView;
+    TextView cardNameView;
+
+    @BindView(R.id.item_card_description)
+    TextView cardDescriptionView;
 
     @BindView(R.id.item_card_img)
     ImageView imageView;
@@ -34,8 +37,11 @@ public class CardViewHolder extends RecyclerView.ViewHolder implements View.OnCl
 
     public void updateWithCardView(MagicCard magicCard, RequestManager requestManager, SearchAdapterListener listener) {
 
-        this.textView.setText(magicCard.getName());
+        this.cardNameView.setText(magicCard.getName());
         requestManager.load(magicCard.getImageUrl()).apply(RequestOptions.circleCropTransform()).into(imageView);
+        if (magicCard.isShowDetails()) {
+            this.cardDescriptionView.setText(magicCard.getText());
+        }
         this.callback = new WeakReference<SearchAdapterListener>(listener);
 
     }

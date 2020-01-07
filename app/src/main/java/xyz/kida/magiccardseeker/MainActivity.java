@@ -69,12 +69,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch (id) {
             case R.id.activity_main_home:
                 this.showFragment(MAIN_FRAGMENT);
+                this.drawerLayout.closeDrawer(GravityCompat.START);
                 break;
             case R.id.activity_main_drawer_search:
                 this.showFragment(SEARCH_FRAGMENT);
+                this.drawerLayout.closeDrawer(GravityCompat.START);
                 break;
             case R.id.activity_main_drawer_collection:
                 this.showFragment(COLLECTION_FRAGMENT);
+                this.drawerLayout.closeDrawer(GravityCompat.START);
                 break;
             default:
                 break;
