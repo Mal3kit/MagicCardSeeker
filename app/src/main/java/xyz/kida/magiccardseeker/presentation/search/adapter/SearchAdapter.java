@@ -20,7 +20,6 @@ public class SearchAdapter extends RecyclerView.Adapter<CardViewHolder> {
 
     private RequestManager requestManager;
     private List<MagicCard> cards;
-
     private final SearchAdapterListener listener;
 
     public SearchAdapter(List<MagicCard> cards, RequestManager requestManager, SearchAdapterListener listener) {
@@ -34,13 +33,13 @@ public class SearchAdapter extends RecyclerView.Adapter<CardViewHolder> {
     public CardViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater layoutInflater = LayoutInflater.from(context);
-        View view = layoutInflater.inflate(R.layout.fragment_search, parent, false);
+        View view = layoutInflater.inflate(R.layout.item_card, parent, false);
         return new CardViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull CardViewHolder holder, int position) {
-        holder.updateWithCardView(this.cards.get(position), this.listener);
+        holder.updateWithCardView(this.cards.get(position), requestManager, this.listener);
     }
 
     @Override
@@ -49,6 +48,7 @@ public class SearchAdapter extends RecyclerView.Adapter<CardViewHolder> {
     }
 
     public MagicCard getMagicCard(int position) {
-        return this.getMagicCard(position);
+        return this.cards.get(position);
     }
+
 }

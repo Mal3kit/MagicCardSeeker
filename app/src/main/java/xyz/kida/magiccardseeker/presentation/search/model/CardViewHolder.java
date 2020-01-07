@@ -1,9 +1,13 @@
 package xyz.kida.magiccardseeker.presentation.search.model;
 
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.RequestManager;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.lang.ref.WeakReference;
 
@@ -18,6 +22,9 @@ public class CardViewHolder extends RecyclerView.ViewHolder implements View.OnCl
     @BindView(R.id.item_card_name)
     TextView textView;
 
+    @BindView(R.id.item_card_img)
+    ImageView imageView;
+
     private WeakReference<SearchAdapterListener> callback;
 
     public CardViewHolder(View view) {
@@ -25,8 +32,10 @@ public class CardViewHolder extends RecyclerView.ViewHolder implements View.OnCl
         ButterKnife.bind(this, view);
     }
 
-    public void updateWithCardView(MagicCard magicCard, SearchAdapterListener listener) {
+    public void updateWithCardView(MagicCard magicCard, RequestManager requestManager, SearchAdapterListener listener) {
+
         this.textView.setText(magicCard.getName());
+        requestManager.load(magicCard.getImageUrl()).apply(RequestOptions.circleCropTransform()).into(imageView);
         this.callback = new WeakReference<SearchAdapterListener>(listener);
 
     }
