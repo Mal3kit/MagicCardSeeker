@@ -17,7 +17,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import xyz.kida.magiccardseeker.presentation.collection.CollectionFragment;
 import xyz.kida.magiccardseeker.presentation.mainPage.MainFragment;
-import xyz.kida.magiccardseeker.presentation.search.SearchFragment;
+import xyz.kida.magiccardseeker.presentation.search.fragment.SearchFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 

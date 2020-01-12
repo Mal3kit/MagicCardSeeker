@@ -3,6 +3,7 @@ package xyz.kida.magiccardseeker.data.api;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
+import io.reactivex.Single;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -16,7 +17,7 @@ public interface MagicCardDisplayService {
     public static final String MAGIC_API_BASE_URL = "https://api.magicthegathering.io/v1/";
 
     @GET("cards")
-    Observable<MagicCardSearchResponse> getMagicCards(@Query("name") String cardname);
+    Single<MagicCardSearchResponse> getMagicCards(@Query("name") String cardname);
 
     public static final Retrofit retrofit = new Retrofit.Builder()
             .baseUrl(MAGIC_API_BASE_URL)

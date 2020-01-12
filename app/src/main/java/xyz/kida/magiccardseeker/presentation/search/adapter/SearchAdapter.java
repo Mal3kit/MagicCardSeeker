@@ -8,24 +8,28 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.RequestManager;
-
+import java.util.ArrayList;
 import java.util.List;
 
 import xyz.kida.magiccardseeker.R;
-import xyz.kida.magiccardseeker.data.api.models.MagicCard;
 import xyz.kida.magiccardseeker.presentation.search.model.CardViewHolder;
+import xyz.kida.magiccardseeker.presentation.search.model.MagicCardOnSwitchListener;
+import xyz.kida.magiccardseeker.presentation.search.model.MagicCardViewModel;
 
 public class SearchAdapter extends RecyclerView.Adapter<CardViewHolder> {
 
-    private RequestManager requestManager;
-    private List<MagicCard> cards;
-    private final SearchAdapterListener listener;
+    private List<MagicCardViewModel> cards;
+    private final MagicCardOnSwitchListener listener;
 
-    public SearchAdapter(List<MagicCard> cards, RequestManager requestManager, SearchAdapterListener listener) {
-        this.requestManager = requestManager;
-        this.cards = cards;
+    public SearchAdapter(MagicCardOnSwitchListener listener) {
+        this.cards = new ArrayList<>();
         this.listener = listener;
+    }
+
+    public void bindViewModels(List<MagicCardViewModel> magicCardViewModels) {
+        this.cards.clear();
+        this.cards.addAll(magicCardViewModels);
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -34,21 +38,17 @@ public class SearchAdapter extends RecyclerView.Adapter<CardViewHolder> {
         Context context = parent.getContext();
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         View view = layoutInflater.inflate(R.layout.item_card, parent, false);
-        return new CardViewHolder(view);
+        return new CardViewHolder(view,listener);
     }
 
     @Override
     public void onBindViewHolder(@NonNull CardViewHolder holder, int position) {
-        holder.updateWithCardView(this.cards.get(position), requestManager, this.listener);
+        holder.updateWithCardView(this.cards.get(position));
     }
 
     @Override
     public int getItemCount() {
         return this.cards.size();
-    }
-
-    public MagicCard getMagicCard(int position) {
-        return this.cards.get(position);
     }
 
 }

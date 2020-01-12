@@ -5,6 +5,10 @@ import com.google.gson.annotations.SerializedName;
 
 public class MagicCard {
 
+    @SerializedName("id")
+    @Expose
+    private String id;
+
     @SerializedName("name")
     @Expose
     private String name;
@@ -17,7 +21,7 @@ public class MagicCard {
     @Expose
     private String text;
 
-    private boolean showDetails = false;
+    private boolean isInCollection;
 
     public String getName() {
         return name;
@@ -43,11 +47,19 @@ public class MagicCard {
         this.text = text;
     }
 
-    public boolean isShowDetails() {
-        return showDetails;
+    public String getId() {
+        return id;
     }
 
-    public void setShowDetails(boolean showDetails) {
-        this.showDetails = showDetails;
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public boolean isInCollection() {
+        return isInCollection;
+    }
+
+    public void setInCollection(boolean inCollection) {
+        isInCollection = inCollection;
     }
 }

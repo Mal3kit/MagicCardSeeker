@@ -1,23 +1,20 @@
 package xyz.kida.magiccardseeker.presentation.search.model;
 
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.RequestManager;
-import com.bumptech.glide.request.RequestOptions;
-
-import java.lang.ref.WeakReference;
+import com.bumptech.glide.Glide;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import xyz.kida.magiccardseeker.R;
-import xyz.kida.magiccardseeker.data.api.models.MagicCard;
-import xyz.kida.magiccardseeker.presentation.search.adapter.SearchAdapterListener;
 
-public class CardViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+public class CardViewHolder extends RecyclerView.ViewHolder {
 
     @BindView(R.id.item_card_name)
     TextView cardNameView;
@@ -28,29 +25,40 @@ public class CardViewHolder extends RecyclerView.ViewHolder implements View.OnCl
     @BindView(R.id.item_card_img)
     ImageView imageView;
 
-    private WeakReference<SearchAdapterListener> callback;
+    @BindView(R.id.collection_switch)
+    private Switch collectionSwitch;
 
-    public CardViewHolder(View view) {
+    private View view;
+    private MagicCardViewModel magicCardViewModel;
+    private MagicCardOnSwitchListener magicCardOnSwitchListener;
+
+    public CardViewHolder(View view, final MagicCardOnSwitchListener magicCardOnSwitchListener) {
         super(view);
+        this.view = view;
+        this.magicCardOnSwitchListener = magicCardOnSwitchListener;
         ButterKnife.bind(this, view);
+        setupListeners();
     }
 
-    public void updateWithCardView(MagicCard magicCard, RequestManager requestManager, SearchAdapterListener listener) {
-
-        this.cardNameView.setText(magicCard.getName());
-        requestManager.load(magicCard.getImageUrl()).apply(RequestOptions.circleCropTransform()).into(imageView);
-        if (magicCard.isShowDetails()) {
-            this.cardDescriptionView.setText(magicCard.getText());
-        }
-        this.callback = new WeakReference<SearchAdapterListener>(listener);
-
+    private void setupListeners() {
+        collectionSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                magicCardOnSwitchListener.onSwitchToggle(magicCardViewModel.getCardId(), isChecked);
+            }
+        });
     }
 
-    @Override
-    public void onClick(View v) {
-        SearchAdapterListener listener = callback.get();
-        if (listener != null) {
-            listener.onClickDeleteButton(getAdapterPosition());
-        }
+
+    public void updateWithCardView(MagicCardViewModel magicCardViewModel) {
+        this.magicCardViewModel = magicCardViewModel;
+        this.cardNameView.setText(magicCardViewModel.getCardName());
+        this.cardDescriptionView.setText(magicCardViewModel.getDescription());
+        this.collectionSwitch.setChecked(magicCardViewModel.isInMyCollection());
+        Glide.with(view)
+                .load(magicCardViewModel.getImageUrl())
+                .circleCrop()
+                .into(imageView);
+
     }
 }
