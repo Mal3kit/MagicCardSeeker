@@ -9,17 +9,17 @@ public class MagicCardEntity {
 
     @NonNull
     @PrimaryKey(autoGenerate = true)
-    public String id;
+    public long id;
     public String cardName;
     private String description;
     private String imageUrl;
     private String externalId;
 
-    public String getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(@NonNull String id) {
+    public void setId(@NonNull long id) {
         this.id = id;
     }
 

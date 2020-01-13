@@ -19,8 +19,8 @@ public class SearchPresenter implements SearchContract.Presenter{
     private SearchContract.View view;
     private MagicCardToViewModelMapper mapper;
 
-    public SearchPresenter(CompositeDisposable compositeDisposable, MagicCardRepository repository, MagicCardToViewModelMapper mapper) {
-        this.compositeDisposable = compositeDisposable;
+    public SearchPresenter(MagicCardRepository repository, MagicCardToViewModelMapper mapper) {
+        this.compositeDisposable = new CompositeDisposable();
         this.repository = repository;
         this.mapper = mapper;
     }

@@ -9,6 +9,7 @@ import android.widget.ProgressBar;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -20,9 +21,12 @@ import butterknife.ButterKnife;
 import io.reactivex.disposables.Disposable;
 import xyz.kida.magiccardseeker.R;
 import xyz.kida.magiccardseeker.data.api.models.MagicCard;
+import xyz.kida.magiccardseeker.data.di.FakeDI;
 import xyz.kida.magiccardseeker.presentation.search.SearchContract;
 import xyz.kida.magiccardseeker.presentation.search.adapter.SearchAdapter;
+import xyz.kida.magiccardseeker.presentation.search.mapper.MagicCardToViewModelMapper;
 import xyz.kida.magiccardseeker.presentation.search.model.MagicCardOnSwitchListener;
+import xyz.kida.magiccardseeker.presentation.search.model.MagicCardViewModel;
 import xyz.kida.magiccardseeker.presentation.search.presenter.SearchPresenter;
 
 public class SearchFragment extends Fragment implements SearchContract.View, MagicCardOnSwitchListener {
@@ -65,8 +69,11 @@ public class SearchFragment extends Fragment implements SearchContract.View, Mag
         configureSearchView();
         configureRecyclerView();
         //TODO : FAKE DI HERE
-        presenter = new SearchPresenter()
+        presenter = new SearchPresenter(FakeDI.getMagicCardRepository(), new MagicCardToViewModelMapper());
+        presenter.attachView(this);
     }
+
+
 
     private void configureSearchView() {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -105,10 +112,40 @@ public class SearchFragment extends Fragment implements SearchContract.View, Mag
         });
     }
 
+    private void configureRecyclerView() {
+        adapter = new SearchAdapter(this);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+    }
+
+    @Override
+    public void showCards(List<MagicCardViewModel> magicCardViewModels) {
+        progressBar.setVisibility(View.GONE);
+        adapter.bindViewModels(magicCardViewModels);
+    }
+
+    @Override
+    public void onSwitchToggle(String cardId, boolean isFavorite) {
+        if (isFavorite) {
+            presenter.addCardToCollection(cardId);
+        } else {
+            presenter.deleteCardFromCollection(cardId);
+        }
+    }
+
+    @Override
+    public void onCardAddToCollection() {
+
+    }
+
+    @Override
+    public void onCardRemovedFromCollection() {
+
+    }
+
     @Override
     public void onDestroy() {
         super.onDestroy();
         this.presenter.detachView();
     }
-
 }

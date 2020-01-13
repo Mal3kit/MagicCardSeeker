@@ -1,7 +1,6 @@
 package xyz.kida.magiccardseeker.data.repository.remote;
 
-import io.reactivex.Observable;
-import retrofit2.http.Query;
+import io.reactivex.Single;
 import xyz.kida.magiccardseeker.data.api.MagicCardDisplayService;
 import xyz.kida.magiccardseeker.data.api.models.MagicCardSearchResponse;
 
@@ -13,7 +12,11 @@ public class MagicCardRemoteDataSource {
         this.magicCardDisplayService = magicCardDisplayService;
     }
 
-    public Observable<MagicCardSearchResponse> getMagicCards(String cardname) {
+    public Single<MagicCardSearchResponse> getMagicCardsSearchResponse(String cardname) {
         return magicCardDisplayService.getMagicCards(cardname);
+    }
+
+    public Single<MagicCardSearchResponse> getMagicCard(String cardId) {
+        return magicCardDisplayService.getMagicCard(cardId);
     }
 }

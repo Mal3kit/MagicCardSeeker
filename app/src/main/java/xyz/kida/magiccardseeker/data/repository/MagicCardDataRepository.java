@@ -4,9 +4,7 @@ import java.util.List;
 
 import io.reactivex.Completable;
 import io.reactivex.Flowable;
-import io.reactivex.Observable;
-import io.reactivex.functions.BiFunction;
-import xyz.kida.magiccardseeker.data.api.models.MagicCard;
+import io.reactivex.Single;
 import xyz.kida.magiccardseeker.data.api.models.MagicCardSearchResponse;
 import xyz.kida.magiccardseeker.data.entity.MagicCardEntity;
 import xyz.kida.magiccardseeker.data.repository.local.MagicCardLocalDataSource;
@@ -26,8 +24,8 @@ public class MagicCardDataRepository implements MagicCardRepository {
     }
 
     @Override
-    public Observable<MagicCardSearchResponse> getMagicCards(String cardname) {
-        return magicCardRemoteDataSource.getMagicCards(cardname);
+    public Single<MagicCardSearchResponse> getMagicCards(String cardname) {
+        return magicCardRemoteDataSource.getMagicCardsSearchResponse(cardname);
     }
 
     @Override
@@ -36,12 +34,16 @@ public class MagicCardDataRepository implements MagicCardRepository {
     }
 
     @Override
-    public Completable addCardToCollection(MagicCardEntity magicCardEntity) {
-        return null;
+    public Completable addCardToCollection(String cardId) {
+        return magicCardRemoteDataSource.getMagicCard(cardId)
+                .map(magicCardSearchResponse ->
+                        magicCardMapper.toMagicCardEntity(magicCardSearchResponse.getCards().get(0)))
+                .flatMapCompletable(magicCardEntity ->
+                        magicCardLocalDataSource.addCardToCollection(magicCardEntity));
     }
 
     @Override
-    public Completable deleteCardFromCollection(String id) {
-        return null;
+    public Completable deleteCardFromCollection(String cardId) {
+        return magicCardLocalDataSource.deleteCardFromCollection(cardId);
     }
 }

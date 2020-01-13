@@ -26,7 +26,7 @@ public class CardViewHolder extends RecyclerView.ViewHolder {
     ImageView imageView;
 
     @BindView(R.id.collection_switch)
-    private Switch collectionSwitch;
+    Switch collectionSwitch;
 
     private View view;
     private MagicCardViewModel magicCardViewModel;
@@ -53,7 +53,6 @@ public class CardViewHolder extends RecyclerView.ViewHolder {
     public void updateWithCardView(MagicCardViewModel magicCardViewModel) {
         this.magicCardViewModel = magicCardViewModel;
         this.cardNameView.setText(magicCardViewModel.getCardName());
-        this.cardDescriptionView.setText(magicCardViewModel.getDescription());
         this.collectionSwitch.setChecked(magicCardViewModel.isInMyCollection());
         Glide.with(view)
                 .load(magicCardViewModel.getImageUrl())

@@ -23,7 +23,7 @@ public interface MagicCardDao {
     @Query("DELETE FROM magiccardentity WHERE id = :id")
     Completable deleteCardFromCollection(String id);
 
-    @Query("SELECT id FROM magiccardentity")
+    @Query("SELECT externalId FROM magiccardentity")
     Single<List<String>> getCollectionListId();
 
 }
