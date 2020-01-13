@@ -1,4 +1,4 @@
-package xyz.kida.magiccardseeker.presentation.search.model;
+package xyz.kida.magiccardseeker.presentation.model;
 
 public class MagicCardViewModel {
 

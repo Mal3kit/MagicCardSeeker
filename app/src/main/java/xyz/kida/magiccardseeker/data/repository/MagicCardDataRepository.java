@@ -8,16 +8,17 @@ import io.reactivex.Single;
 import xyz.kida.magiccardseeker.data.api.models.MagicCardSearchResponse;
 import xyz.kida.magiccardseeker.data.entity.MagicCardEntity;
 import xyz.kida.magiccardseeker.data.repository.local.MagicCardLocalDataSource;
-import xyz.kida.magiccardseeker.data.repository.mapper.MagicCardMapper;
 import xyz.kida.magiccardseeker.data.repository.remote.MagicCardRemoteDataSource;
+import xyz.kida.magiccardseeker.presentation.mappers.MagicCardEntityMapper;
+import xyz.kida.magiccardseeker.presentation.model.MagicCardViewModel;
 
 public class MagicCardDataRepository implements MagicCardRepository {
 
     private MagicCardLocalDataSource magicCardLocalDataSource;
     private MagicCardRemoteDataSource magicCardRemoteDataSource;
-    private MagicCardMapper magicCardMapper;
+    private MagicCardEntityMapper magicCardMapper;
 
-    public MagicCardDataRepository(MagicCardLocalDataSource magicCardLocalDataSource, MagicCardRemoteDataSource magicCardRemoteDataSource, MagicCardMapper magicCardMapper) {
+    public MagicCardDataRepository(MagicCardLocalDataSource magicCardLocalDataSource, MagicCardRemoteDataSource magicCardRemoteDataSource, MagicCardEntityMapper magicCardMapper) {
         this.magicCardLocalDataSource = magicCardLocalDataSource;
         this.magicCardRemoteDataSource = magicCardRemoteDataSource;
         this.magicCardMapper = magicCardMapper;
@@ -34,13 +35,10 @@ public class MagicCardDataRepository implements MagicCardRepository {
     }
 
     @Override
-    public Completable addCardToCollection(String cardId) {
-        return magicCardRemoteDataSource.getMagicCard(cardId)
-                .map(magicCardSearchResponse ->
-                        magicCardMapper.toMagicCardEntity(magicCardSearchResponse.getCards().get(0)))
-                .flatMapCompletable(magicCardEntity ->
-                        magicCardLocalDataSource.addCardToCollection(magicCardEntity));
+    public Completable addCardToCollection(MagicCardViewModel cardViewModel) {
+        return magicCardLocalDataSource.addCardToCollection(magicCardMapper.toEntity(cardViewModel));
     }
+
 
     @Override
     public Completable deleteCardFromCollection(String cardId) {

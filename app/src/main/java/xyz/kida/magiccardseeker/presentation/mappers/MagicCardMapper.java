@@ -1,9 +1,9 @@
-package xyz.kida.magiccardseeker.presentation.search.mapper;
+package xyz.kida.magiccardseeker.presentation.mappers;
 
 import xyz.kida.magiccardseeker.data.api.models.MagicCard;
-import xyz.kida.magiccardseeker.presentation.search.model.MagicCardViewModel;
+import xyz.kida.magiccardseeker.presentation.model.MagicCardViewModel;
 
-public class MagicCardToViewModelMapper {
+public class MagicCardMapper {
 
     public MagicCardViewModel toViewModel(MagicCard magicCard) {
         MagicCardViewModel magicCardViewModel = new MagicCardViewModel();

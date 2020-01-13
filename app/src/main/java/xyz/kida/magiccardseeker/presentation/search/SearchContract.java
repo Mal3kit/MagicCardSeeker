@@ -2,7 +2,7 @@ package xyz.kida.magiccardseeker.presentation.search;
 
 import java.util.List;
 
-import xyz.kida.magiccardseeker.presentation.search.model.MagicCardViewModel;
+import xyz.kida.magiccardseeker.presentation.model.MagicCardViewModel;
 
 public interface SearchContract {
 
@@ -21,7 +21,7 @@ public interface SearchContract {
 
         void cancelSubscription();
 
-        void addCardToCollection(String cardId);
+        void addCardToCollection(MagicCardViewModel magicCardViewModel);
 
         void deleteCardFromCollection(String cardId);
 

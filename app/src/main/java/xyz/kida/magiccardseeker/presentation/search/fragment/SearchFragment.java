@@ -18,15 +18,13 @@ import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.reactivex.disposables.Disposable;
 import xyz.kida.magiccardseeker.R;
-import xyz.kida.magiccardseeker.data.api.models.MagicCard;
 import xyz.kida.magiccardseeker.data.di.FakeDI;
+import xyz.kida.magiccardseeker.presentation.mappers.MagicCardMapper;
+import xyz.kida.magiccardseeker.presentation.model.MagicCardViewModel;
 import xyz.kida.magiccardseeker.presentation.search.SearchContract;
 import xyz.kida.magiccardseeker.presentation.search.adapter.SearchAdapter;
-import xyz.kida.magiccardseeker.presentation.search.mapper.MagicCardToViewModelMapper;
 import xyz.kida.magiccardseeker.presentation.search.model.MagicCardOnSwitchListener;
-import xyz.kida.magiccardseeker.presentation.search.model.MagicCardViewModel;
 import xyz.kida.magiccardseeker.presentation.search.presenter.SearchPresenter;
 
 public class SearchFragment extends Fragment implements SearchContract.View, MagicCardOnSwitchListener {
@@ -40,10 +38,9 @@ public class SearchFragment extends Fragment implements SearchContract.View, Mag
     @BindView(R.id.progress_bar)
     ProgressBar progressBar;
 
-    private List<MagicCard> cards;
-    private Disposable disposable;
+    private View rootView;
     private SearchAdapter adapter;
-    SearchContract.Presenter presenter;
+    private SearchContract.Presenter presenter;
 
     public SearchFragment() {
         // Required empty public constructor
@@ -58,9 +55,9 @@ public class SearchFragment extends Fragment implements SearchContract.View, Mag
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        View view = inflater.inflate(R.layout.fragment_search, container, false);
-        ButterKnife.bind(this, view);
-        return view;
+        rootView = inflater.inflate(R.layout.fragment_search, container, false);
+        ButterKnife.bind(this, rootView);
+        return rootView;
     }
 
     @Override
@@ -69,7 +66,7 @@ public class SearchFragment extends Fragment implements SearchContract.View, Mag
         configureSearchView();
         configureRecyclerView();
         //TODO : FAKE DI HERE
-        presenter = new SearchPresenter(FakeDI.getMagicCardRepository(), new MagicCardToViewModelMapper());
+        presenter = new SearchPresenter(FakeDI.getMagicCardRepository(), new MagicCardMapper());
         presenter.attachView(this);
     }
 
@@ -125,11 +122,11 @@ public class SearchFragment extends Fragment implements SearchContract.View, Mag
     }
 
     @Override
-    public void onSwitchToggle(String cardId, boolean isFavorite) {
+    public void onSwitchToggle(MagicCardViewModel viewModel, boolean isFavorite) {
         if (isFavorite) {
-            presenter.addCardToCollection(cardId);
+            presenter.addCardToCollection(viewModel);
         } else {
-            presenter.deleteCardFromCollection(cardId);
+            presenter.deleteCardFromCollection(viewModel.getCardId());
         }
     }
 

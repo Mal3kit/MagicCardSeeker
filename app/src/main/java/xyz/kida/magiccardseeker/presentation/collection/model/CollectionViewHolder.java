@@ -1,4 +1,4 @@
-package xyz.kida.magiccardseeker.presentation.search.model;
+package xyz.kida.magiccardseeker.presentation.collection.model;
 
 import android.view.View;
 import android.widget.CompoundButton;
@@ -15,10 +15,13 @@ import butterknife.ButterKnife;
 import xyz.kida.magiccardseeker.R;
 import xyz.kida.magiccardseeker.presentation.model.MagicCardViewModel;
 
-public class CardViewHolder extends RecyclerView.ViewHolder {
+public class CollectionViewHolder extends RecyclerView.ViewHolder {
 
     @BindView(R.id.item_card_name)
     TextView cardNameView;
+
+    @BindView(R.id.item_card_description)
+    TextView cardDescriptionView;
 
     @BindView(R.id.item_card_img)
     ImageView imageView;
@@ -27,35 +30,36 @@ public class CardViewHolder extends RecyclerView.ViewHolder {
     Switch collectionSwitch;
 
     private View view;
-    private MagicCardViewModel magicCardViewModel;
-    private MagicCardOnSwitchListener listener;
+    private MagicCardViewModel viewModel;
+    private CollectionListener listener;
 
-    public CardViewHolder(View view, final MagicCardOnSwitchListener listener) {
+    public CollectionViewHolder(View view, CollectionListener listener) {
         super(view);
         this.view = view;
-        this.listener = listener;
         ButterKnife.bind(this, view);
         setupListeners();
+        this.listener = listener;
     }
 
     private void setupListeners() {
         collectionSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                listener.onSwitchToggle(magicCardViewModel, isChecked);
+                if (!isChecked) {
+                    listener.onDeleteCardFromCollection(viewModel.getCardId());
+                }
             }
         });
     }
 
-
     public void updateWithCardView(MagicCardViewModel magicCardViewModel) {
-        this.magicCardViewModel = magicCardViewModel;
+        this.viewModel = magicCardViewModel;
         this.cardNameView.setText(magicCardViewModel.getCardName());
-        this.collectionSwitch.setChecked(magicCardViewModel.isInMyCollection());
+        this.collectionSwitch.setChecked(true);
+        this.cardDescriptionView.setText(viewModel.getDescription());
         Glide.with(view)
                 .load(magicCardViewModel.getImageUrl())
                 .circleCrop()
                 .into(imageView);
-
     }
 }

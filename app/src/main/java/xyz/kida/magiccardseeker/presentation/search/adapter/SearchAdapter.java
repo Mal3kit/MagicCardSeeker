@@ -10,25 +10,29 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import xyz.kida.magiccardseeker.R;
+import xyz.kida.magiccardseeker.presentation.model.MagicCardViewModel;
 import xyz.kida.magiccardseeker.presentation.search.model.CardViewHolder;
 import xyz.kida.magiccardseeker.presentation.search.model.MagicCardOnSwitchListener;
-import xyz.kida.magiccardseeker.presentation.search.model.MagicCardViewModel;
 
 public class SearchAdapter extends RecyclerView.Adapter<CardViewHolder> {
 
-    private List<MagicCardViewModel> cards;
+    private List<MagicCardViewModel> magicCardViewModels;
     private final MagicCardOnSwitchListener listener;
 
     public SearchAdapter(MagicCardOnSwitchListener listener) {
-        this.cards = new ArrayList<>();
+        this.magicCardViewModels = new ArrayList<>();
         this.listener = listener;
     }
 
     public void bindViewModels(List<MagicCardViewModel> magicCardViewModels) {
-        this.cards.clear();
-        this.cards.addAll(magicCardViewModels);
+        this.magicCardViewModels.clear();
+        this.magicCardViewModels.addAll(magicCardViewModels
+                .stream()
+                .filter(model -> model.getImageUrl() != null)
+                .collect(Collectors.toList()));
         notifyDataSetChanged();
     }
 
@@ -43,12 +47,12 @@ public class SearchAdapter extends RecyclerView.Adapter<CardViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull CardViewHolder holder, int position) {
-        holder.updateWithCardView(this.cards.get(position));
+        holder.updateWithCardView(this.magicCardViewModels.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return this.cards.size();
+        return this.magicCardViewModels.size();
     }
 
 }

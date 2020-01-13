@@ -15,7 +15,7 @@ import com.google.android.material.navigation.NavigationView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import xyz.kida.magiccardseeker.presentation.collection.CollectionFragment;
+import xyz.kida.magiccardseeker.presentation.collection.fragment.CollectionFragment;
 import xyz.kida.magiccardseeker.presentation.mainPage.MainFragment;
 import xyz.kida.magiccardseeker.presentation.search.fragment.SearchFragment;
 

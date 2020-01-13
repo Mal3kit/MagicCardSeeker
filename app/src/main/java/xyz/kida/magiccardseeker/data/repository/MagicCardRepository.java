@@ -7,6 +7,7 @@ import io.reactivex.Flowable;
 import io.reactivex.Single;
 import xyz.kida.magiccardseeker.data.api.models.MagicCardSearchResponse;
 import xyz.kida.magiccardseeker.data.entity.MagicCardEntity;
+import xyz.kida.magiccardseeker.presentation.model.MagicCardViewModel;
 
 public interface MagicCardRepository {
 
@@ -14,7 +15,7 @@ public interface MagicCardRepository {
 
     Flowable<List<MagicCardEntity>> loadCollection();
 
-    Completable addCardToCollection(String magicCardId);
+    Completable addCardToCollection(MagicCardViewModel magicCardViewModel);
 
     Completable deleteCardFromCollection(String id);
 }

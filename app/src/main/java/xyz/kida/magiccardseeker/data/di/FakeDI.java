@@ -18,8 +18,8 @@ import xyz.kida.magiccardseeker.data.db.MagicCardDatabase;
 import xyz.kida.magiccardseeker.data.repository.MagicCardDataRepository;
 import xyz.kida.magiccardseeker.data.repository.MagicCardRepository;
 import xyz.kida.magiccardseeker.data.repository.local.MagicCardLocalDataSource;
-import xyz.kida.magiccardseeker.data.repository.mapper.MagicCardMapper;
 import xyz.kida.magiccardseeker.data.repository.remote.MagicCardRemoteDataSource;
+import xyz.kida.magiccardseeker.presentation.mappers.MagicCardEntityMapper;
 
 public class FakeDI {
 
@@ -37,7 +37,7 @@ public class FakeDI {
             magicCardRepository = new MagicCardDataRepository(
                     new MagicCardLocalDataSource(getMagicCardDatabase()),
                     new MagicCardRemoteDataSource(getMagicCardDisplayService()),
-                    new MagicCardMapper());
+                    new MagicCardEntityMapper());
         }
 
         return magicCardRepository;
