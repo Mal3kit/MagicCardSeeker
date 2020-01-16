@@ -12,9 +12,19 @@ public class MagicCardMapper {
         if (magicCard.getText() != null) {
             magicCardViewModel.setDescription(magicCard.getText());
         }
-        magicCard.setInCollection(magicCard.isInCollection());
+        magicCardViewModel.setInMyCollection(magicCard.isInCollection());
         magicCardViewModel.setImageUrl(magicCard.getImageUrl());
 
+
+        if (magicCard.getColors() != null) {
+            if (magicCard.getColors().size() == 1) {
+                magicCardViewModel.setMainColor(magicCard.getColors().get(0));
+            } else {
+                magicCardViewModel.setMainColor("Multicolor");
+            }
+        } else {
+            magicCardViewModel.setMainColor("No color");
+        }
         return magicCardViewModel;
     }
 

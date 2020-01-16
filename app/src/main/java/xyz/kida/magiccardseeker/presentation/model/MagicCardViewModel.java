@@ -6,6 +6,10 @@ public class MagicCardViewModel {
     private String imageUrl;
     private String cardName;
     private String description;
+    private String mainColor;
+
+    private int backGroundColor;
+    private int fontColor;
 
     private boolean isInMyCollection;
 
@@ -39,6 +43,14 @@ public class MagicCardViewModel {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getMainColor() {
+        return mainColor;
+    }
+
+    public void setMainColor(String mainColor) {
+        this.mainColor = mainColor;
     }
 
     public boolean isInMyCollection() {

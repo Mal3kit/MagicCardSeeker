@@ -14,6 +14,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import xyz.kida.magiccardseeker.R;
 import xyz.kida.magiccardseeker.presentation.model.MagicCardViewModel;
+import xyz.kida.magiccardseeker.utils.ColorUtil;
 
 public class CollectionViewHolder extends RecyclerView.ViewHolder {
 
@@ -32,6 +33,7 @@ public class CollectionViewHolder extends RecyclerView.ViewHolder {
     private View view;
     private MagicCardViewModel viewModel;
     private CollectionListener listener;
+    private ColorUtil colorUtil = new ColorUtil();
 
     public CollectionViewHolder(View view, CollectionListener listener) {
         super(view);
@@ -53,13 +55,13 @@ public class CollectionViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void updateWithCardView(MagicCardViewModel magicCardViewModel) {
+//        this.itemView.setBackgroundResource(colorUtil.setBackgroundColor(magicCardViewModel));
         this.viewModel = magicCardViewModel;
         this.cardNameView.setText(magicCardViewModel.getCardName());
         this.collectionSwitch.setChecked(true);
         this.cardDescriptionView.setText(viewModel.getDescription());
         Glide.with(view)
                 .load(magicCardViewModel.getImageUrl())
-                .circleCrop()
                 .into(imageView);
     }
 }

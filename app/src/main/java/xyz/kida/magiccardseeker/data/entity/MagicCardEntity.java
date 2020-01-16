@@ -14,6 +14,7 @@ public class MagicCardEntity {
     private String description;
     private String imageUrl;
     private String externalId;
+    private String color;
 
     public long getId() {
         return id;
@@ -53,5 +54,13 @@ public class MagicCardEntity {
 
     public void setExternalId(String externalId) {
         this.externalId = externalId;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
     }
 }

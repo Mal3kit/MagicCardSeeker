@@ -39,12 +39,8 @@ public class CardViewHolder extends RecyclerView.ViewHolder {
     }
 
     private void setupListeners() {
-        collectionSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                listener.onSwitchToggle(magicCardViewModel, isChecked);
-            }
-        });
+        collectionSwitch.setOnCheckedChangeListener((buttonView, isChecked)
+                -> listener.onSwitchToggle(magicCardViewModel, isChecked));
     }
 
 
@@ -55,6 +51,7 @@ public class CardViewHolder extends RecyclerView.ViewHolder {
         Glide.with(view)
                 .load(magicCardViewModel.getImageUrl())
                 .circleCrop()
+                .centerCrop()
                 .into(imageView);
 
     }
