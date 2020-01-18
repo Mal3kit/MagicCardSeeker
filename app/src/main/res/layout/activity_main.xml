@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:theme="@style/Widget.AppCompat.Toolbar"/>
+            app:theme="@style/AppTheme"/>
 
         <FrameLayout
             android:id="@+id/activity_main_frame_layout"
