@@ -37,7 +37,7 @@ public class CollectionCardAdapter extends RecyclerView.Adapter<CollectionViewHo
     public CollectionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater layoutInflater = LayoutInflater.from(context);
-        View view = layoutInflater.inflate(R.layout.item_card, parent, false);
+        View view = layoutInflater.inflate(R.layout.item_card_collection, parent, false);
         return new CollectionViewHolder(view, listener);
     }
 

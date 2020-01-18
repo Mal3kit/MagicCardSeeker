@@ -13,7 +13,7 @@ public class MagicCardEntityMapper {
             magicCardViewModel.setDescription(magicCardEntity.getDescription());
         }
         magicCardViewModel.setImageUrl(magicCardEntity.getImageUrl());
-        magicCardViewModel.setMainColor(magicCardEntity.getColor());
+        magicCardViewModel.setColors(magicCardEntity.getColors());
 
         return magicCardViewModel;
     }
@@ -26,7 +26,7 @@ public class MagicCardEntityMapper {
         if (magicCardViewModel.getDescription() != null) {
             magicCardEntity.setDescription(magicCardViewModel.getDescription());
         }
-        magicCardEntity.setColor(magicCardViewModel.getMainColor());
+        magicCardEntity.setColors(magicCardViewModel.getColors());
         return magicCardEntity;
     }
 }

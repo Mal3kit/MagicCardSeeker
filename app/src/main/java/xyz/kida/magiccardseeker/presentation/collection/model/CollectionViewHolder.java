@@ -14,7 +14,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import xyz.kida.magiccardseeker.R;
 import xyz.kida.magiccardseeker.presentation.model.MagicCardViewModel;
-import xyz.kida.magiccardseeker.utils.ColorUtil;
+import xyz.kida.magiccardseeker.utils.ColorEnum;
 
 public class CollectionViewHolder extends RecyclerView.ViewHolder {
 
@@ -27,13 +27,30 @@ public class CollectionViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.item_card_img)
     ImageView imageView;
 
+    @BindView(R.id.item_card_red_img)
+    ImageView redManaView;
+
+    @BindView(R.id.item_card_blue_img)
+    ImageView blueManaView;
+
+    @BindView(R.id.item_card_green_img)
+    ImageView greenManaView;
+
+    @BindView(R.id.item_card_black_img)
+    ImageView blackManaView;
+
+    @BindView(R.id.item_card_white_img)
+    ImageView whiteManaView;
+
+    @BindView(R.id.item_card_colorless_img)
+    ImageView colorlessManaView;
+
     @BindView(R.id.collection_switch)
     Switch collectionSwitch;
 
     private View view;
     private MagicCardViewModel viewModel;
     private CollectionListener listener;
-    private ColorUtil colorUtil = new ColorUtil();
 
     public CollectionViewHolder(View view, CollectionListener listener) {
         super(view);
@@ -55,7 +72,6 @@ public class CollectionViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void updateWithCardView(MagicCardViewModel magicCardViewModel) {
-//        this.itemView.setBackgroundResource(colorUtil.setBackgroundColor(magicCardViewModel));
         this.viewModel = magicCardViewModel;
         this.cardNameView.setText(magicCardViewModel.getCardName());
         this.collectionSwitch.setChecked(true);
@@ -63,5 +79,27 @@ public class CollectionViewHolder extends RecyclerView.ViewHolder {
         Glide.with(view)
                 .load(magicCardViewModel.getImageUrl())
                 .into(imageView);
+        setUpColorsImages(magicCardViewModel);
+    }
+
+    private void setUpColorsImages(MagicCardViewModel magicCardViewModel) {
+        if (!magicCardViewModel.getColors().isEmpty()) {
+            colorlessManaView.setVisibility(View.GONE);
+        }
+        if (!magicCardViewModel.getColors().contains(ColorEnum.BLACK.getColor())) {
+            blackManaView.setVisibility(View.GONE);
+        }
+        if (!magicCardViewModel.getColors().contains(ColorEnum.BLUE.getColor())) {
+            blueManaView.setVisibility(View.GONE);
+        }
+        if (!magicCardViewModel.getColors().contains(ColorEnum.GREEN.getColor())) {
+            greenManaView.setVisibility(View.GONE);
+        }
+        if (!magicCardViewModel.getColors().contains(ColorEnum.RED.getColor())) {
+            redManaView.setVisibility(View.GONE);
+        }
+        if (!magicCardViewModel.getColors().contains(ColorEnum.WHITE.getColor())) {
+            whiteManaView.setVisibility(View.GONE);
+        }
     }
 }

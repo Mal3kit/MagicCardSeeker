@@ -14,17 +14,8 @@ public class MagicCardMapper {
         }
         magicCardViewModel.setInMyCollection(magicCard.isInCollection());
         magicCardViewModel.setImageUrl(magicCard.getImageUrl());
+        magicCardViewModel.setColors(magicCard.getColors());
 
-
-        if (magicCard.getColors() != null) {
-            if (magicCard.getColors().size() == 1) {
-                magicCardViewModel.setMainColor(magicCard.getColors().get(0));
-            } else {
-                magicCardViewModel.setMainColor("Multicolor");
-            }
-        } else {
-            magicCardViewModel.setMainColor("No color");
-        }
         return magicCardViewModel;
     }
 

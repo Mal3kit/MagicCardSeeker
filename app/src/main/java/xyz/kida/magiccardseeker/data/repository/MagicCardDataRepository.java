@@ -5,6 +5,8 @@ import java.util.List;
 import io.reactivex.Completable;
 import io.reactivex.Flowable;
 import io.reactivex.Single;
+import io.reactivex.functions.BiFunction;
+import xyz.kida.magiccardseeker.data.api.models.MagicCard;
 import xyz.kida.magiccardseeker.data.api.models.MagicCardSearchResponse;
 import xyz.kida.magiccardseeker.data.entity.MagicCardEntity;
 import xyz.kida.magiccardseeker.data.repository.local.MagicCardLocalDataSource;
@@ -26,7 +28,18 @@ public class MagicCardDataRepository implements MagicCardRepository {
 
     @Override
     public Single<MagicCardSearchResponse> getMagicCards(String cardname) {
-        return magicCardRemoteDataSource.getMagicCardsSearchResponse(cardname);
+        return magicCardRemoteDataSource.getMagicCardsSearchResponse(cardname)
+                .zipWith(magicCardLocalDataSource.getCollectionIdList(), new BiFunction<MagicCardSearchResponse, List<String>, MagicCardSearchResponse>() {
+                    @Override
+                    public MagicCardSearchResponse apply(MagicCardSearchResponse magicCardSearchResponse, List<String> idList) throws Exception {
+                        for (MagicCard card : magicCardSearchResponse.getCards()) {
+                            if (idList.contains(card.getId())) {
+                                card.setInCollection(true);
+                            }
+                        }
+                        return magicCardSearchResponse;
+                    }
+                });
     }
 
     @Override

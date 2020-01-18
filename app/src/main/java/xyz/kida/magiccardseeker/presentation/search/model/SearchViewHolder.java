@@ -15,7 +15,7 @@ import butterknife.ButterKnife;
 import xyz.kida.magiccardseeker.R;
 import xyz.kida.magiccardseeker.presentation.model.MagicCardViewModel;
 
-public class CardViewHolder extends RecyclerView.ViewHolder {
+public class SearchViewHolder extends RecyclerView.ViewHolder {
 
     @BindView(R.id.item_card_name)
     TextView cardNameView;
@@ -30,7 +30,7 @@ public class CardViewHolder extends RecyclerView.ViewHolder {
     private MagicCardViewModel magicCardViewModel;
     private MagicCardOnSwitchListener listener;
 
-    public CardViewHolder(View view, final MagicCardOnSwitchListener listener) {
+    public SearchViewHolder(View view, final MagicCardOnSwitchListener listener) {
         super(view);
         this.view = view;
         this.listener = listener;

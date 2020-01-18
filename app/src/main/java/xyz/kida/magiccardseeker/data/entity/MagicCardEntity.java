@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.util.List;
+
 @Entity
 public class MagicCardEntity {
 
@@ -14,7 +16,7 @@ public class MagicCardEntity {
     private String description;
     private String imageUrl;
     private String externalId;
-    private String color;
+    private List<String> colors;
 
     public long getId() {
         return id;
@@ -56,11 +58,11 @@ public class MagicCardEntity {
         this.externalId = externalId;
     }
 
-    public String getColor() {
-        return color;
+    public List<String> getColors() {
+        return colors;
     }
 
-    public void setColor(String color) {
-        this.color = color;
+    public void setColors(List<String> colors) {
+        this.colors = colors;
     }
 }

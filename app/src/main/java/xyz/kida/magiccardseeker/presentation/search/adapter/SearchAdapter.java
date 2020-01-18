@@ -14,10 +14,10 @@ import java.util.stream.Collectors;
 
 import xyz.kida.magiccardseeker.R;
 import xyz.kida.magiccardseeker.presentation.model.MagicCardViewModel;
-import xyz.kida.magiccardseeker.presentation.search.model.CardViewHolder;
+import xyz.kida.magiccardseeker.presentation.search.model.SearchViewHolder;
 import xyz.kida.magiccardseeker.presentation.search.model.MagicCardOnSwitchListener;
 
-public class SearchAdapter extends RecyclerView.Adapter<CardViewHolder> {
+public class SearchAdapter extends RecyclerView.Adapter<SearchViewHolder> {
 
     private List<MagicCardViewModel> magicCardViewModels;
     private final MagicCardOnSwitchListener listener;
@@ -38,15 +38,15 @@ public class SearchAdapter extends RecyclerView.Adapter<CardViewHolder> {
 
     @NonNull
     @Override
-    public CardViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public SearchViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         View view = layoutInflater.inflate(R.layout.item_card, parent, false);
-        return new CardViewHolder(view,listener);
+        return new SearchViewHolder(view,listener);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CardViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull SearchViewHolder holder, int position) {
         holder.updateWithCardView(this.magicCardViewModels.get(position));
     }
 

@@ -12,6 +12,7 @@ public class MagicCardMapper {
         magicCardEntity.setDescription(magicCard.getText());
         magicCardEntity.setImageUrl(magicCard.getImageUrl());
         magicCardEntity.setExternalId(magicCard.getId());
+        magicCardEntity.setColors(magicCard.getColors());
 
         return magicCardEntity;
     }
