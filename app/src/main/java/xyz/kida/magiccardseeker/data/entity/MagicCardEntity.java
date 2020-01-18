@@ -10,19 +10,18 @@ import java.util.List;
 public class MagicCardEntity {
 
     @NonNull
-    @PrimaryKey(autoGenerate = true)
-    public long id;
+    @PrimaryKey
+    public String id;
     public String cardName;
     private String description;
     private String imageUrl;
-    private String externalId;
     private List<String> colors;
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(@NonNull long id) {
+    public void setId(@NonNull String id) {
         this.id = id;
     }
 
@@ -48,14 +47,6 @@ public class MagicCardEntity {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
-    }
-
-    public String getExternalId() {
-        return externalId;
-    }
-
-    public void setExternalId(String externalId) {
-        this.externalId = externalId;
     }
 
     public List<String> getColors() {

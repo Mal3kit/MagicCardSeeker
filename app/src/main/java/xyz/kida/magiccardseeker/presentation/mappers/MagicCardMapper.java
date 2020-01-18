@@ -8,6 +8,7 @@ public class MagicCardMapper {
     public MagicCardViewModel toViewModel(MagicCard magicCard) {
         MagicCardViewModel magicCardViewModel = new MagicCardViewModel();
         magicCardViewModel.setCardId(magicCard.getId());
+        magicCardViewModel.setCardId(magicCard.getId());
         magicCardViewModel.setCardName(magicCard.getName());
         if (magicCard.getText() != null) {
             magicCardViewModel.setDescription(magicCard.getText());

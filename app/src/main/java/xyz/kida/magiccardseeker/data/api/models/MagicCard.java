@@ -29,6 +29,7 @@ public class MagicCard {
 
     private boolean isInCollection;
 
+
     public String getName() {
         return name;
     }
@@ -76,4 +77,5 @@ public class MagicCard {
     public void setInCollection(boolean inCollection) {
         isInCollection = inCollection;
     }
+
 }

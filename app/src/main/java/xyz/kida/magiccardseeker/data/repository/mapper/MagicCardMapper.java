@@ -8,10 +8,10 @@ public class MagicCardMapper {
     public MagicCardEntity toMagicCardEntity(MagicCard magicCard) {
 
         MagicCardEntity magicCardEntity = new MagicCardEntity();
+        magicCardEntity.setId(magicCard.getId());
         magicCardEntity.setCardName(magicCard.getName());
         magicCardEntity.setDescription(magicCard.getText());
         magicCardEntity.setImageUrl(magicCard.getImageUrl());
-        magicCardEntity.setExternalId(magicCard.getId());
         magicCardEntity.setColors(magicCard.getColors());
 
         return magicCardEntity;

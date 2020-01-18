@@ -20,10 +20,10 @@ public interface MagicCardDao {
     @Insert
     Completable addCardToCollection(MagicCardEntity magicCardEntity);
 
-    @Query("DELETE FROM magiccardentity WHERE externalId = :id")
+    @Query("DELETE FROM magiccardentity WHERE id = :id")
     Completable deleteCardFromCollection(String id);
 
-    @Query("SELECT externalId FROM magiccardentity")
+    @Query("SELECT id FROM magiccardentity")
     Single<List<String>> getCollectionListId();
 
 }

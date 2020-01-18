@@ -7,7 +7,7 @@ public class MagicCardEntityMapper {
 
     public MagicCardViewModel toViewModel(MagicCardEntity magicCardEntity) {
         MagicCardViewModel magicCardViewModel = new MagicCardViewModel();
-        magicCardViewModel.setCardId(magicCardEntity.getExternalId());
+        magicCardViewModel.setCardId(magicCardEntity.getId());
         magicCardViewModel.setCardName(magicCardEntity.getCardName());
         if (magicCardEntity.getDescription() != null) {
             magicCardViewModel.setDescription(magicCardEntity.getDescription());
@@ -20,7 +20,7 @@ public class MagicCardEntityMapper {
 
     public MagicCardEntity toEntity(MagicCardViewModel magicCardViewModel) {
         MagicCardEntity magicCardEntity = new MagicCardEntity();
-        magicCardEntity.setExternalId(magicCardViewModel.getCardId());
+        magicCardEntity.setId(magicCardViewModel.getCardId());
         magicCardEntity.setCardName(magicCardViewModel.getCardName());
         magicCardEntity.setImageUrl(magicCardViewModel.getImageUrl());
         if (magicCardViewModel.getDescription() != null) {
