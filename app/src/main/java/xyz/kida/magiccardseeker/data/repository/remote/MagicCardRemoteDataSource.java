@@ -15,8 +15,4 @@ public class MagicCardRemoteDataSource {
     public Single<MagicCardSearchResponse> getMagicCardsSearchResponse(String cardname) {
         return magicCardDisplayService.getMagicCards(cardname);
     }
-
-    public Single<MagicCardSearchResponse> getMagicCard(String cardId) {
-        return magicCardDisplayService.getMagicCard(cardId);
-    }
 }

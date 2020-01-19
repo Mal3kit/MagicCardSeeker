@@ -5,17 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import xyz.kida.magiccardseeker.R;
@@ -26,6 +20,10 @@ import xyz.kida.magiccardseeker.presentation.search.SearchContract;
 import xyz.kida.magiccardseeker.presentation.search.adapter.SearchAdapter;
 import xyz.kida.magiccardseeker.presentation.search.model.MagicCardOnSwitchListener;
 import xyz.kida.magiccardseeker.presentation.search.presenter.SearchPresenter;
+
+import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class SearchFragment extends Fragment implements SearchContract.View, MagicCardOnSwitchListener {
 
@@ -65,7 +63,6 @@ public class SearchFragment extends Fragment implements SearchContract.View, Mag
         super.onActivityCreated(savedInstanceState);
         configureSearchView();
         configureRecyclerView();
-        //TODO : FAKE DI HERE
         presenter = new SearchPresenter(FakeDI.getMagicCardRepository(), new MagicCardMapper());
         presenter.attachView(this);
     }

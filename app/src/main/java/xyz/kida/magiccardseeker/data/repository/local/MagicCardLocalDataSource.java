@@ -1,12 +1,12 @@
 package xyz.kida.magiccardseeker.data.repository.local;
 
-import java.util.List;
-
 import io.reactivex.Completable;
 import io.reactivex.Flowable;
 import io.reactivex.Single;
 import xyz.kida.magiccardseeker.data.db.MagicCardDatabase;
 import xyz.kida.magiccardseeker.data.entity.MagicCardEntity;
+
+import java.util.List;
 
 public class MagicCardLocalDataSource {
 

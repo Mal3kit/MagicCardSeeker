@@ -5,14 +5,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import xyz.kida.magiccardseeker.R;
@@ -23,6 +19,8 @@ import xyz.kida.magiccardseeker.presentation.collection.model.CollectionListener
 import xyz.kida.magiccardseeker.presentation.collection.presenter.CollectionPresenter;
 import xyz.kida.magiccardseeker.presentation.mappers.MagicCardEntityMapper;
 import xyz.kida.magiccardseeker.presentation.model.MagicCardViewModel;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.

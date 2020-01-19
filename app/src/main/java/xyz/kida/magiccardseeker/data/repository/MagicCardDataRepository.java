@@ -1,7 +1,5 @@
 package xyz.kida.magiccardseeker.data.repository;
 
-import java.util.List;
-
 import io.reactivex.Completable;
 import io.reactivex.Flowable;
 import io.reactivex.Single;
@@ -13,6 +11,8 @@ import xyz.kida.magiccardseeker.data.repository.local.MagicCardLocalDataSource;
 import xyz.kida.magiccardseeker.data.repository.remote.MagicCardRemoteDataSource;
 import xyz.kida.magiccardseeker.presentation.mappers.MagicCardEntityMapper;
 import xyz.kida.magiccardseeker.presentation.model.MagicCardViewModel;
+
+import java.util.List;
 
 public class MagicCardDataRepository implements MagicCardRepository {
 

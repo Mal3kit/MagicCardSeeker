@@ -2,7 +2,6 @@ package xyz.kida.magiccardseeker;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,20 +9,20 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
-
-import com.google.android.material.navigation.NavigationView;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.google.android.material.navigation.NavigationView;
 import xyz.kida.magiccardseeker.presentation.collection.fragment.CollectionFragment;
 import xyz.kida.magiccardseeker.presentation.mainPage.MainFragment;
 import xyz.kida.magiccardseeker.presentation.search.fragment.SearchFragment;
+import xyz.kida.magiccardseeker.presentation.search.fragment.SearchFragmentGrid;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     private static final int MAIN_FRAGMENT = 0;
     private static final int SEARCH_FRAGMENT = 1;
-    private static final int COLLECTION_FRAGMENT = 2;
+    private static final int SEARCH_FRAGMENT_GRID = 2;
+    private static final int COLLECTION_FRAGMENT = 3;
 
 
 
@@ -38,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private MainFragment mainFragment;
     private SearchFragment searchFragment;
+    private SearchFragmentGrid searchFragmentGrid;
     private CollectionFragment collectionFragment;
 
     @Override
@@ -75,6 +75,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 this.showFragment(SEARCH_FRAGMENT);
                 this.drawerLayout.closeDrawer(GravityCompat.START);
                 break;
+            case R.id.activity_main_drawer_search_grid:
+                this.showFragment(SEARCH_FRAGMENT_GRID);
+                this.drawerLayout.closeDrawer(GravityCompat.START);
+                break;
             case R.id.activity_main_drawer_collection:
                 this.showFragment(COLLECTION_FRAGMENT);
                 this.drawerLayout.closeDrawer(GravityCompat.START);
@@ -101,7 +105,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case SEARCH_FRAGMENT:
                 this.showSearchFragment();
                 break;
-
+            case SEARCH_FRAGMENT_GRID:
+                this.showSearchGridFragment();
+                break;
             case COLLECTION_FRAGMENT:
                 this.showCollectionFragment();
                 break;
@@ -125,6 +131,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             searchFragment = SearchFragment.newInstance();
         }
         startTransactionFragment(searchFragment);
+    }
+
+    private void showSearchGridFragment() {
+
+        if (searchFragmentGrid == null) {
+            searchFragmentGrid = SearchFragmentGrid.newInstance();
+        }
+        startTransactionFragment(searchFragmentGrid);
     }
 
     private void showCollectionFragment() {

@@ -1,8 +1,5 @@
 package xyz.kida.magiccardseeker.presentation.collection.presenter;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.observers.DisposableCompletableObserver;
@@ -12,6 +9,9 @@ import xyz.kida.magiccardseeker.data.entity.MagicCardEntity;
 import xyz.kida.magiccardseeker.data.repository.MagicCardRepository;
 import xyz.kida.magiccardseeker.presentation.collection.CollectionContract;
 import xyz.kida.magiccardseeker.presentation.mappers.MagicCardEntityMapper;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class CollectionPresenter implements CollectionContract.Presenter {
 

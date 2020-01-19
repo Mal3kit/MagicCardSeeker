@@ -9,7 +9,4 @@ public interface MagicCardDisplayService {
 
     @GET("cards")
     Single<MagicCardSearchResponse> getMagicCards(@Query("name") String cardname);
-
-    @GET("cards")
-    Single<MagicCardSearchResponse> getMagicCard(@Query("id") String id);
 }

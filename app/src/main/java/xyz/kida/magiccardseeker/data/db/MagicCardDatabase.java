@@ -3,7 +3,6 @@ package xyz.kida.magiccardseeker.data.db;
 import androidx.room.Database;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
-
 import xyz.kida.magiccardseeker.data.entity.ColorConverter;
 import xyz.kida.magiccardseeker.data.entity.MagicCardEntity;
 

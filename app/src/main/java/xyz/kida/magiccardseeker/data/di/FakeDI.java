@@ -1,13 +1,8 @@
 package xyz.kida.magiccardseeker.data.di;
 
 import android.content.Context;
-
 import androidx.room.Room;
-
 import com.google.gson.Gson;
-
-import java.util.concurrent.TimeUnit;
-
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -20,6 +15,8 @@ import xyz.kida.magiccardseeker.data.repository.MagicCardRepository;
 import xyz.kida.magiccardseeker.data.repository.local.MagicCardLocalDataSource;
 import xyz.kida.magiccardseeker.data.repository.remote.MagicCardRemoteDataSource;
 import xyz.kida.magiccardseeker.presentation.mappers.MagicCardEntityMapper;
+
+import java.util.concurrent.TimeUnit;
 
 public class FakeDI {
 

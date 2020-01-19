@@ -1,7 +1,5 @@
 package xyz.kida.magiccardseeker.presentation.search.presenter;
 
-import java.util.stream.Collectors;
-
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.observers.DisposableCompletableObserver;
@@ -12,6 +10,8 @@ import xyz.kida.magiccardseeker.data.repository.MagicCardRepository;
 import xyz.kida.magiccardseeker.presentation.mappers.MagicCardMapper;
 import xyz.kida.magiccardseeker.presentation.model.MagicCardViewModel;
 import xyz.kida.magiccardseeker.presentation.search.SearchContract;
+
+import java.util.stream.Collectors;
 
 public class SearchPresenter implements SearchContract.Presenter{
 

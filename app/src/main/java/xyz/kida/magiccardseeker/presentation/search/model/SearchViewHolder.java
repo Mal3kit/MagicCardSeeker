@@ -1,17 +1,13 @@
 package xyz.kida.magiccardseeker.presentation.search.model;
 
 import android.view.View;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
-
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.bumptech.glide.Glide;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.bumptech.glide.Glide;
 import xyz.kida.magiccardseeker.R;
 import xyz.kida.magiccardseeker.presentation.model.MagicCardViewModel;
 
