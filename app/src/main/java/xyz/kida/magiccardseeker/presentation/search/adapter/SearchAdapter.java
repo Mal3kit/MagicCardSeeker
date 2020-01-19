@@ -4,16 +4,18 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import xyz.kida.magiccardseeker.R;
-import xyz.kida.magiccardseeker.presentation.model.MagicCardViewModel;
-import xyz.kida.magiccardseeker.presentation.search.model.MagicCardOnSwitchListener;
-import xyz.kida.magiccardseeker.presentation.search.model.SearchViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import xyz.kida.magiccardseeker.R;
+import xyz.kida.magiccardseeker.presentation.model.MagicCardViewModel;
+import xyz.kida.magiccardseeker.presentation.search.model.MagicCardOnSwitchListener;
+import xyz.kida.magiccardseeker.presentation.search.model.SearchViewHolder;
 
 public class SearchAdapter extends RecyclerView.Adapter<SearchViewHolder> {
 

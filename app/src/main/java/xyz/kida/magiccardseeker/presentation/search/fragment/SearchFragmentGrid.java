@@ -1,6 +1,7 @@
 package xyz.kida.magiccardseeker.presentation.search.fragment;
 
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 

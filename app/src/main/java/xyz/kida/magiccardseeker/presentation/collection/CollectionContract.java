@@ -1,8 +1,8 @@
 package xyz.kida.magiccardseeker.presentation.collection;
 
-import xyz.kida.magiccardseeker.presentation.model.MagicCardViewModel;
-
 import java.util.List;
+
+import xyz.kida.magiccardseeker.presentation.model.MagicCardViewModel;
 
 public interface CollectionContract {
 

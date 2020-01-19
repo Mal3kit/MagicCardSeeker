@@ -1,8 +1,8 @@
 package xyz.kida.magiccardseeker.presentation.search;
 
-import xyz.kida.magiccardseeker.presentation.model.MagicCardViewModel;
-
 import java.util.List;
+
+import xyz.kida.magiccardseeker.presentation.model.MagicCardViewModel;
 
 public interface SearchContract {
 

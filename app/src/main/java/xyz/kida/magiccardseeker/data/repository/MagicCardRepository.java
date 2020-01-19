@@ -1,13 +1,13 @@
 package xyz.kida.magiccardseeker.data.repository;
 
+import java.util.List;
+
 import io.reactivex.Completable;
 import io.reactivex.Flowable;
 import io.reactivex.Single;
 import xyz.kida.magiccardseeker.data.api.models.MagicCardSearchResponse;
 import xyz.kida.magiccardseeker.data.entity.MagicCardEntity;
 import xyz.kida.magiccardseeker.presentation.model.MagicCardViewModel;
-
-import java.util.List;
 
 public interface MagicCardRepository {
 
